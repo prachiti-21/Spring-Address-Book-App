@@ -2,7 +2,7 @@ package com.bridgelabz.SpringAddressBook.repository;
 
 
 
-import com.bridgelabz.SpringAddressBook.entity.Contact;
+import com.bridgelabz.SpringAddressBook.model.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

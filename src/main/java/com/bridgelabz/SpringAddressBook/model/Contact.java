@@ -1,4 +1,4 @@
-package com.bridgelabz.SpringAddressBook.entity;
+package com.bridgelabz.SpringAddressBook.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
