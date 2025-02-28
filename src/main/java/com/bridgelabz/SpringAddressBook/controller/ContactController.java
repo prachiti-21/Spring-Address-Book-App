@@ -58,25 +58,16 @@ public class ContactController {
     @PostMapping
     public ResponseEntity<ContactDTO> createContact(@RequestBody ContactDTO contactDTO) {
         Contact contact = convertToEntity(contactDTO);
-        Contact savedContact = contactService.saveContact(contact);
+        Contact savedContact = contactService.addContact(contact);
         return new ResponseEntity<>(convertToDTO(savedContact), HttpStatus.CREATED);
     }
 
     // PUT - Update Contact by ID
     @PutMapping("/{id}")
     public ResponseEntity<Contact> updateContact(@PathVariable Long id, @RequestBody ContactDTO contactDTO) {
-        Optional<Contact> existingContact = contactService.getContactById(id);
-
-        if (existingContact.isPresent()) {
-            Contact contact = existingContact.get();
-            contact.setName(contactDTO.getName());
-            contact.setPhone(contactDTO.getPhone());
-
-            Contact updatedContact = contactService.saveContact(contact);
-            return new ResponseEntity<>(updatedContact, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return contactService.updateContact(id,updatedContact)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // DELETE - Delete Contact by ID

@@ -24,11 +24,21 @@ public class ContactService {
         return contactRepository.findById(id);
     }
 
-    public Contact saveContact(Contact contact) {
+    public Contact addContact(Contact contact) {
         return contactRepository.save(contact);
     }
 
-    public void deleteContact(Long id) {
-        contactRepository.deleteById(id);
+    public Optional<Contact> updateContact(Long id, Contact updatedContact) {
+        return getContactById(id).map(existingContact -> {
+            existingContact.setName(updatedContact.getName());
+            existingContact.setEmail(updatedContact.getEmail());
+            existingContact.setPhone(updatedContact.getPhone());
+            return contactRepository.update(existingContact);
+        });
     }
-}
+
+        public void deleteContact (Long id){
+            contactRepository.deleteById(id);
+        }
+    }
+
